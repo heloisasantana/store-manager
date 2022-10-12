@@ -1,6 +1,7 @@
 const productsServices = require('../services');
 
 const HTTP_OK_STATUS = 200;
+const HTTP_CREATE_201 = 201;
 const HTTP_ERROR_404 = 404;
 
 const getAllProducts = async (_request, response) => {
@@ -17,7 +18,14 @@ const getProductFromID = async (request, response) => {
   return response.status(HTTP_OK_STATUS).json(product);
 };
 
+const postNewProduct = async (request, response) => {
+  const dataProduct = request.body;
+  const newProduct = await productsServices.postNewProduct(dataProduct);
+  return response.status(HTTP_CREATE_201).json(newProduct);
+};
+
 module.exports = {
   getAllProducts,
   getProductFromID,
+  postNewProduct,
 };
