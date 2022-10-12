@@ -20,9 +20,20 @@ const getProductFromID = async (request, response) => {
 };
 
 const postNewProduct = async (request, response) => {
-  const dataProduct = request.body;
-  const newProduct = await productsServices.postNewProduct(dataProduct);
+  const { name } = request.body;
+  const newProduct = await productsServices.postNewProduct(name);
   return response.status(HTTP_CREATE_201).json(newProduct);
+};
+
+const updateProductFromID = async (request, response) => {
+  const { id } = request.params;
+  const { name } = request.body;
+  const product = await productsServices.getProductFromID(Number(id));
+  if (!product) {
+    return response.status(HTTP_ERROR_404).json({ message: 'Product not found' });
+  }
+  const updatedProduct = await productsServices.updateProductFromID(name, Number(id));
+  return response.status(HTTP_OK_STATUS).json(updatedProduct);
 };
 
 const deleteProductFromID = async (request, response) => {
@@ -39,5 +50,6 @@ module.exports = {
   getAllProducts,
   getProductFromID,
   postNewProduct,
+  updateProductFromID,
   deleteProductFromID,
 };

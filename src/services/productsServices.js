@@ -10,9 +10,14 @@ const getProductFromID = async (id) => {
   return product;
 };
 
-const postNewProduct = async (dataProduct) => {
-  const newProduct = await productsModels.postNewProduct(dataProduct);
+const postNewProduct = async (name) => {
+  const newProduct = await productsModels.postNewProduct(name);
   return newProduct;
+};
+
+const updateProductFromID = async (name, id) => {
+  const updatedProduct = await productsModels.updateProductFromID(name, id);
+  return updatedProduct;
 };
 
 const deleteProductFromID = async (id) => {
@@ -23,5 +28,6 @@ module.exports = {
   getAllProducts,
   getProductFromID,
   postNewProduct,
+  updateProductFromID,
   deleteProductFromID,
 };
