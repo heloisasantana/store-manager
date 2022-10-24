@@ -1,3 +1,8 @@
 const productsControllers = require('./productsControllers');
 
-module.exports = productsControllers;
+const salesControllers = require('./salesControllers');
+
+module.exports = {
+  productsControllers,
+  salesControllers,
+};
